@@ -167,7 +167,7 @@ tr:hover .rowbtn{opacity:1}
   <button class="refresh" id="btnExp">导出备份</button>
   <button class="refresh" onclick="document.getElementById('impFile').click()">导入备份</button>
   <input type="file" id="impFile" accept=".json" style="display:none">
-  <span>文件方式打开时浏览器可能不保存数据：<b>点「复制带数据链接」→ 发到微信并收藏 → 以后从收藏打开</b>，数据永不丢失；存储/Cookie/导出备份为辅助保障</span></div>
+  <span id="tipTxt">文件方式打开时浏览器可能不保存数据：<b>点「复制带数据链接」→ 发到微信并收藏 → 以后从收藏打开</b>，数据永不丢失；存储/Cookie/导出备份为辅助保障</span></div>
 <div class="note" style="margin-top:6px"> · 行情来源腾讯接口 · 盈亏色为A股习惯（红盈绿亏）· 历史统计区间 2023-09 ~ 2026-09</div>
 
 </div>
@@ -487,6 +487,10 @@ document.getElementById("method").innerHTML=
  "① 股息率买点 = 每股年分红 ÷ 目标股息率；② 3年25分位价来自 2023-09~2026-09 共725个交易日收盘价统计；③ PE/PB 估值带校验（银行保险看PB，其余看PE）。分红数据可点格修改。";
 
 function tickClock(){document.getElementById("clock").textContent=new Date().toLocaleString("zh-CN",{hour12:false});}
+if(location.protocol==="https:"){
+  const tip=document.getElementById("tipTxt");
+  if(tip)tip.innerHTML="数据保存在本机浏览器（存储+Cookie双备份），建议每月点「导出备份」留档";
+}
 tickClock();setInterval(tickClock,1000);
 render();
 refresh();
